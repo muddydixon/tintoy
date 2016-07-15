@@ -1,0 +1,69 @@
+env:
+  browser: true
+  commonjs: true
+  es6: true
+extends: 'eslint:recommended'
+parserOptions:
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+    jsx: true
+  sourceType: module
+plugins:
+  - react
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - double
+  semi:
+    - error
+    - always
+  no-unused-vars:
+    - warn
+  no-undef:
+    - error
+  react/jsx-uses-vars:
+    - warn
+  react/jsx-uses-react:
+    - error
+  prefer-const:
+    - error
+  no-empty:
+    - error
+  no-extra-parens:
+    - error
+  no-extra-semi:
+    - error
+  no-func-assign:
+    - error
+  prefer-template:
+    - error
+  camelcase:
+    - error
+  comma-style:
+    - error
+  comma-spacing:
+    - error
+  comma-dangle:
+    - error
+    - never
+  computed-property-spacing:
+    - error
+    - never
+  consistent-this:
+    - error
+    - that
+  eol-last:
+    - error
+  no-trailing-spaces:
+    - error
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  no-console:
+    - warn

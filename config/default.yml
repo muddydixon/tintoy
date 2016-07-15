@@ -1,0 +1,5 @@
+name: tintoy
+port: 6300
+toy:
+  dockerfilePath: dockerfiles
+  imagesDirPath: images
