@@ -14,7 +14,7 @@ export default class ToyEdit extends Component {
   render(){
     const {toys, config} = this.props.data;
     if(toys.length === 0) return null;
-    const {name, dockerfile, image, container} = toys.find((toy)=> toy.image.RepoTags[0].indexOf(this.props.params.toyId));
+    const {name, dockerfile, image, container, runoptions} = toys.find((toy)=> toy.image.RepoTags[0].indexOf(this.props.params.toyId));
     return <div className="container fluid-row">
       <form onSubmit={this.onSubmit.bind(this)}>
         <div className="form-group">
@@ -24,12 +24,20 @@ export default class ToyEdit extends Component {
         <div className="form-group">
           <label>Dockerfile</label>
           <div>
-            <textarea rows={dockerfile.split(/\n/).length + 10} ref="dockerfile" className="form-control"
+            <textarea rows={(dockerfile || "").split(/\n/).length + 10} ref="dockerfile" className="form-control"
               defaultValue={dockerfile} />
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Runoptions</label>
+          <div>
+            <textarea rows={(runoptions || "").split(/\n/).length + 3} ref="runoptions" className="form-control"
+              defaultValue={runoptions || ""} />
           </div>
         </div>
         <button className="btn btn-primary">Update</button>
       </form>
+
       <div className="bs-callout bs-callout-info">
         <h4>How to use</h4>
         <p>If connect your resources, open bot IPs</p>

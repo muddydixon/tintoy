@@ -40,7 +40,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "DEBUG=modem,tintoy:* node-dev index.js",
+    "dev": "DEBUG=tintoy:*,${DEBUG} node-dev index.js",
     "web:build": "browserify -o ./public/js/bundle.js -t [ babelify --presets [ es2015 react ] ] web/bundle.js",
     "web:watch": "watchify -v -d -o ./public/js/bundle.js -t [ babelify --presets [ es2015 react ] ] web/bundle.js",
     "web:lint": "eslint web/**/*.js web/*.js"

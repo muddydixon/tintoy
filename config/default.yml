@@ -1,5 +1,12 @@
 name: tintoy
 port: 6300
 toy:
-  dockerfilePath: dockerfiles
   imagesDirPath: images
+dataconnect:
+  ssh:
+    user: USERNAME
+    pass: PASSWORD
+    key:  CLIENT_CERT_KEY
+    dir:  DOCKERFILE_DIR_ON_DOCKER_ENGINE
+  dockermachine:
+    name: default

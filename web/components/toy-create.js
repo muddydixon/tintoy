@@ -3,18 +3,23 @@ import {Link} from "react-router";
 
 import ToyAction from "../actions/toy-action";
 
-const placeholder = `FROM <image>
+const placeholderDockerfile = `FROM <image>
 EXPOSE 8080
 ENTRYPOINT <entrypoint>
-CMD <command>
-`;
+CMD <command>`;
+const placeholderRunoptions = `--env XXX=XXX
+--env YYY=YYY
+--restart=always
+--privileged
+# ignore port, volumes`;
 
 export default class ToyEdit extends Component {
   onSubmit(ev){
     ev.preventDefault();
     const name       = this.refs.name.value.trim();
     const dockerfile = this.refs.dockerfile.value.trim();
-    ToyAction.create({name, dockerfile});
+    const runoptions = this.refs.runoptions.value.trim();
+    ToyAction.create({name, dockerfile, runoptions});
   }
   render(){
     const {config} = this.props.data;
@@ -28,8 +33,15 @@ export default class ToyEdit extends Component {
         <div className="form-group">
           <label>Dockerfile</label>
           <div>
-            <textarea rows={placeholder.split(/\n/).length + 10} ref="dockerfile" className="form-control"
-              defaultValue={placeholder} placeholder={placeholder}/>
+            <textarea rows={placeholderDockerfile.split(/\n/).length + 10} ref="dockerfile" className="form-control"
+              defaultValue={placeholderDockerfile} placeholder={placeholderDockerfile}/>
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Runoptions</label>
+          <div>
+            <textarea rows={(placeholderRunoptions || "").split(/\n/).length + 3} ref="runoptions" className="form-control"
+              defaultValue={placeholderRunoptions || ""} />
           </div>
         </div>
         <button className="btn btn-primary">Create</button>

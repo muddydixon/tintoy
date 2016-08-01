@@ -25,6 +25,8 @@ const program = commander
                 process.env.SSH_CRT)
         .option("--crtkey <SSH_KEY>", "ssh key", String,
                 process.env.SSH_KEY)
+        .option("--machine <NAME>", "docker-machine name", String,
+                process.env.DOCKER_MACHINE_NAME)
         .parse(process.argv);
 
 const comOpts = {};

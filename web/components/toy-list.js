@@ -8,7 +8,7 @@ export default class ToyList extends Component {
       <table className="table">
       <thead>
       <tr>
-      <th>Name</th><th>Created</th><th>Ports</th><th>Status</th>
+      <th>Name</th><th>Created</th><th>Ports</th><th>Status</th><th>Link</th>
       </tr>
       </thead>
       <tbody>
