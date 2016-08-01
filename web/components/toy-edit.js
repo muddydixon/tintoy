@@ -1,21 +1,33 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
+import FullScreen from "react-fullscreen";
 
+import Loader from "./loader";
 import ToyAction from "../actions/toy-action";
 
 export default class ToyEdit extends Component {
+  constructor(props){
+    super(props);
+    this.state = {onLoading: false};
+  }
   onSubmit(ev){
     ev.preventDefault();
     const name       = this.props.params.toyId;
     const dockerfile = this.refs.dockerfile.value.trim();
-    ToyAction.modify({name, dockerfile});
-    this.context.router.push("/");
+    const runoptions = this.refs.runoptions.value.trim();
+    ToyAction.modify({name, dockerfile, runoptions}).then(()=>{
+      this.setState({onLoading: false});
+      this.context.router.push("/");
+    });
+    this.setState({onLoading: true});
   }
   render(){
     const {toys, config} = this.props.data;
+    console.log(this.state);
     if(toys.length === 0) return null;
     const {name, dockerfile, image, container, runoptions} = toys.find((toy)=> toy.image.RepoTags[0].indexOf(this.props.params.toyId));
     return <div className="container fluid-row">
+      {this.state.onLoading ? <FullScreen><Loader /></FullScreen> : null}
       <form onSubmit={this.onSubmit.bind(this)}>
         <div className="form-group">
           <label>Name</label>

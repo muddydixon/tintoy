@@ -12,7 +12,7 @@ export default class Toy extends Component {
       if(["80", "8080"].indexOf(port.PrivatePort)) webPort = port.PublicPort;
       return `${port.PrivatePort}:${port.PublicPort}/${port.Type}`;
     }).join(", ") : "";
-    const link = `http://${ConfigStore.getState().ips[0]}:${webPort}`;
+    const link = `http://${ConfigStore.getState().hosts[0]}:${webPort}`;
     return <tr>
       <td><Link to={`/toys/${toy.name}`}>{toy.name}</Link></td>
       <td>{moment(toy.image.Created * 1000).format("YYYY/MM/DD hh:mm")}</td>

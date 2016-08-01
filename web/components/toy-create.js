@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
+import FullScreen from "react-fullscreen";
 
+import Loader from "./loader";
 import ToyAction from "../actions/toy-action";
 
 const placeholderDockerfile = `FROM <image>
@@ -13,19 +15,28 @@ const placeholderRunoptions = `--env XXX=XXX
 --privileged
 # ignore port, volumes`;
 
-export default class ToyEdit extends Component {
+export default class ToyCreate extends Component {
+  constructor(props){
+    super(props);
+    this.state = {onLoading: false};
+  }
   onSubmit(ev){
     ev.preventDefault();
     const name       = this.refs.name.value.trim();
     const dockerfile = this.refs.dockerfile.value.trim();
     const runoptions = this.refs.runoptions.value.trim();
-    ToyAction.create({name, dockerfile, runoptions});
+    ToyAction.create({name, dockerfile, runoptions}).then(()=>{
+      this.setState({onLoading: false});
+      this.context.router.push("/");
+    });
+    this.setState({onLoading: true});
   }
   render(){
     const {config} = this.props.data;
     const runAttrs = ["ENV"];
 
     return <div className="container fluid-row">
+      {this.state.onLoading ? <FullScreen><Loader /></FullScreen> : null}
       <form onSubmit={this.onSubmit.bind(this)}>
         <div className="form-group">
           <label>Name</label>
@@ -43,26 +54,6 @@ export default class ToyEdit extends Component {
           <div>
             <textarea rows={(placeholderRunoptions || "").split(/\n/).length + 3} ref="runoptions" className="form-control"
               defaultValue={placeholderRunoptions || ""} />
-          </div>
-        </div>
-        <div className="form-group">
-          <label>Run option</label>
-          <div className="form-group">
-            <div className="row container">
-              <div className="col-md-3">
-                <select ref="name" className="form-control">
-                  {runAttrs.map((attr, id)=> <option key={id}>ENV</option>)}
-                </select>
-              </div>
-              <div className="col-md-9">
-                <input type="text" ref="name" className="form-control" />
-              </div>
-            </div>
-            <div className="row container">
-              <div className="col-md-3">
-                <button className="btn btn-success btn-xs"><i className="fa fa-plus" />&nbsp;Add Opt</button>
-              </div>
-            </div>
           </div>
         </div>
         <button className="btn btn-primary">Create</button>
@@ -93,3 +84,5 @@ export default class ToyEdit extends Component {
     </div>;
   }
 }
+
+ToyCreate.contextTypes = {router: React.PropTypes.object.isRequired};
