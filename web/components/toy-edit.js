@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router";
 import FullScreen from "react-fullscreen";
 
+import ConfigStore from "../stores/config-store";
 import Loader from "./loader";
 import ToyAction from "../actions/toy-action";
 
@@ -16,15 +17,21 @@ export default class ToyEdit extends Component {
     const dockerfile = this.refs.dockerfile.value.trim();
     const runoptions = this.refs.runoptions.value.trim();
     ToyAction.modify({name, dockerfile, runoptions}).then(()=>{
+      console.log("modified");
       this.setState({onLoading: false});
       this.context.router.push("/");
+    }).catch((err)=>{
+      console.log(err);
     });
     this.setState({onLoading: true});
   }
   render(){
-    const {toys, config} = this.props.data;
+    const {toys} = this.props.data;
+    const config = ConfigStore.getState();
     if(toys.length === 0) return null;
-    const {name, dockerfile, image, container, runoptions} = toys.find((toy)=> toy.image.RepoTags[0].indexOf(this.props.params.toyId));
+    const {name, dockerfile, image, container, runoptions} = toys.find((toy)=>{
+      return toy.image.RepoTags[0].indexOf(this.props.params.toyId) > -1;
+    });
     return <div className="container fluid-row">
       {this.state.onLoading ? <FullScreen><Loader /></FullScreen> : null}
       <form onSubmit={this.onSubmit.bind(this)}>
@@ -53,7 +60,7 @@ export default class ToyEdit extends Component {
         <h4>How to use</h4>
         <p>If connect your resources, open bot IPs</p>
         <ul>
-          {(config.ips || []).map((ip)=> <li key={ip}>{ip}</li>)}
+          {(config.hosts || []).map((ip)=> <li key={ip}>{ip}</li>)}
         </ul>
       </div>
       <div className="bs-callout bs-callout-info">

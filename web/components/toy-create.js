@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router";
 import FullScreen from "react-fullscreen";
 
+import ConfigStore from "../stores/config-store";
 import Loader from "./loader";
 import ToyAction from "../actions/toy-action";
 
@@ -32,7 +33,7 @@ export default class ToyCreate extends Component {
     this.setState({onLoading: true});
   }
   render(){
-    const {config} = this.props.data;
+    const config = ConfigStore.getState();
     const runAttrs = ["ENV"];
 
     return <div className="container fluid-row">
@@ -62,7 +63,7 @@ export default class ToyCreate extends Component {
         <h4>How to use</h4>
         <p>If connect your resources, open bot IPs</p>
         <ul>
-          {(config.ips || []).map((ip)=> <li key={ip}>{ip}</li>)}
+          {(config.hosts || []).map((ip)=> <li key={ip}>{ip}</li>)}
         </ul>
       </div>
       <div className="bs-callout bs-callout-info">

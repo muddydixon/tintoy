@@ -17,7 +17,7 @@ export default class Toy extends Component {
       <td><Link to={`/toys/${toy.name}`}>{toy.name}</Link></td>
       <td>{moment(toy.image.Created * 1000).format("YYYY/MM/DD hh:mm")}</td>
       <td>{portsInfo}</td>
-      <td>{toy.container && toy.container.State ?
+      <td className="text-center">{toy.container && toy.container.State ?
            <button className={"btn btn-success btn-xs"}>{toy.container.State}</button> :
            <button className={"btn btn-danger btn-xs"}>{"未起動"}</button>}</td>
       <td>{webPort ? <a target="_blank" href={link}>Link</a> : null}</td>

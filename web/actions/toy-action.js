@@ -6,6 +6,7 @@ export default {
   create(toy){
     return fetch(`${Const.baseUrl}/manage/toys`, {
       method: "POST",
+      timeout: 60 * 60 * 1000,
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json"
@@ -16,11 +17,13 @@ export default {
       return toy;
     }).catch((err)=>{
       dispatch({type: Const.ERROR, err});
+      throw err;
     });
   },
   modify(toy){
     return fetch(`${Const.baseUrl}/manage/toys/${toy.name}`, {
       method: "PUT",
+      timeout: 60 * 60 * 1000,
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json"
@@ -31,6 +34,7 @@ export default {
       return toy;
     }).catch((err)=>{
       dispatch({type: Const.ERROR, err});
+      throw err;
     });
   },
   fetchAll(){

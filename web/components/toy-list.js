@@ -3,7 +3,7 @@ import Toy from "./toy";
 
 export default class ToyList extends Component {
   render(){
-    const {toys, config} = this.props.data;
+    const {toys} = this.props.data;
     return <div className="container">
       <table className="table">
       <thead>
@@ -12,7 +12,7 @@ export default class ToyList extends Component {
       </tr>
       </thead>
       <tbody>
-      {toys.map((toy)=> <Toy key={toy.name} toy={toy} config={config} />)}
+      {toys.map((toy)=> <Toy key={toy.name} toy={toy} />)}
       </tbody>
       </table>
     </div>;

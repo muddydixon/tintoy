@@ -5,7 +5,7 @@ export default class Loader extends Component {
     const style = {
       opacity: 0.5,
       background: "grey",
-      zIndex: 10,
+      zIndex: 1001,
       position: "absolute",
       top: 0,
       left: 0,
