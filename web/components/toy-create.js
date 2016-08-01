@@ -23,6 +23,7 @@ export default class ToyEdit extends Component {
   }
   render(){
     const {config} = this.props.data;
+    const runAttrs = ["ENV"];
 
     return <div className="container fluid-row">
       <form onSubmit={this.onSubmit.bind(this)}>
@@ -42,6 +43,26 @@ export default class ToyEdit extends Component {
           <div>
             <textarea rows={(placeholderRunoptions || "").split(/\n/).length + 3} ref="runoptions" className="form-control"
               defaultValue={placeholderRunoptions || ""} />
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Run option</label>
+          <div className="form-group">
+            <div className="row container">
+              <div className="col-md-3">
+                <select ref="name" className="form-control">
+                  {runAttrs.map((attr, id)=> <option key={id}>ENV</option>)}
+                </select>
+              </div>
+              <div className="col-md-9">
+                <input type="text" ref="name" className="form-control" />
+              </div>
+            </div>
+            <div className="row container">
+              <div className="col-md-3">
+                <button className="btn btn-success btn-xs"><i className="fa fa-plus" />&nbsp;Add Opt</button>
+              </div>
+            </div>
           </div>
         </div>
         <button className="btn btn-primary">Create</button>
