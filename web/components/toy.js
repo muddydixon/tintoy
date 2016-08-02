@@ -20,7 +20,7 @@ export default class Toy extends Component {
       <td>{toy.container && toy.container.State ?
            <button className={"btn btn-success btn-xs"}>{toy.container.State}</button> :
            <button className={"btn btn-danger btn-xs"}>{"未起動"}</button>}</td>
-      <td><a target="_blank" href={link}>Link</a></td>
+      <td>{webPort ? <a target="_blank" href={link}>Link</a> : null}</td>
       </tr>;
   }
 }

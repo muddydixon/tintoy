@@ -23,7 +23,6 @@ export default class ToyEdit extends Component {
   }
   render(){
     const {toys, config} = this.props.data;
-    console.log(this.state);
     if(toys.length === 0) return null;
     const {name, dockerfile, image, container, runoptions} = toys.find((toy)=> toy.image.RepoTags[0].indexOf(this.props.params.toyId));
     return <div className="container fluid-row">
@@ -41,7 +40,7 @@ export default class ToyEdit extends Component {
           </div>
         </div>
         <div className="form-group">
-          <label>Runoptions</label>
+          <label>Runoptions (one opt in each line)</label>
           <div>
             <textarea rows={(runoptions || "").split(/\n/).length + 3} ref="runoptions" className="form-control"
               defaultValue={runoptions || ""} />

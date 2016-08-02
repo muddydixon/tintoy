@@ -50,10 +50,10 @@ export default class ToyCreate extends Component {
           </div>
         </div>
         <div className="form-group">
-          <label>Runoptions</label>
+          <label>Runoptions (one opt in each line)</label>
           <div>
             <textarea rows={(placeholderRunoptions || "").split(/\n/).length + 3} ref="runoptions" className="form-control"
-              defaultValue={placeholderRunoptions || ""} />
+              placeholder={placeholderRunoptions || ""} />
           </div>
         </div>
         <button className="btn btn-primary">Create</button>
