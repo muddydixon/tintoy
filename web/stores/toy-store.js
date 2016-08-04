@@ -13,7 +13,6 @@ class ToyStore extends ReduceStore {
     case Const.TOY_CREATE:
       return state.concat(action.toy);
     case Const.TOY_MODIFY:
-      console.log(action.toy);
       return state.map((toy)=> toy.name === action.toy.name ? action.toy : toy);
     default:
       return state;
