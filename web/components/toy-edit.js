@@ -17,7 +17,6 @@ export default class ToyEdit extends Component {
     const dockerfile = this.refs.dockerfile.value.trim();
     const runoptions = this.refs.runoptions.value.trim();
     ToyAction.modify({name, dockerfile, runoptions}).then(()=>{
-      console.log("modified");
       this.setState({onLoading: false});
       this.context.router.push("/");
     }).catch((err)=>{
